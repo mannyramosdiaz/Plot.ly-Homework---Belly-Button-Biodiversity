@@ -1,4 +1,4 @@
-// Use D3 fetch to read the JSON file
+// ** D3 fetch to read the JSON file **//
 function buildData(sample) {    
     d3.json("samples.json").then((data) => {
         console.log(data)
@@ -6,20 +6,19 @@ function buildData(sample) {
         var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
         var result = resultArray[0];
         
-        //Chart div
+        //**Chart div**//
         var CHART = d3.select("#sample-metadata");
 
-        //Clear html Chart 
+        //**Clear html Chart**// 
         CHART.html("");
 
-        //Object entries
+        //**Object entries**//
         Object.entries(result).forEach(([key, value]) => {
             CHART.append("h6").text(`${key.toUpperCase()}: ${value}`);
         });
     });
 }
 
-//Plotly.newPlot(CHART, data);
   function buildCharts(sample){
 
     d3.json('samples.json').then((data) =>{
@@ -31,7 +30,7 @@ function buildData(sample) {
         var otu_labels = result.out_labels;
         var sample_values = result.sample_values;
 
-        // Make a buuble chart
+        //** Buuble chart **//
 
         var bubbleLayout = {
             title: "Bacterias per Sample",
@@ -50,10 +49,10 @@ function buildData(sample) {
                 text: otu_labels,
                 mode: "markers",
                 marker: {
-                 size: sample_values,
-                 color: otu_ids,
-                 colorscale: 'magma'  
-                } 
+                size: sample_values,
+                color: otu_ids,
+                colorscale: 'magma'  
+                    } 
             }
         ];
 
@@ -61,14 +60,12 @@ function buildData(sample) {
         Plotly.newPlot("bubble", bubbleData, bubbleLayout);
     
 
-        // lets do the bar chart
+        //** Bar chart**//
         var yvalues = otu_ids.slice(0, 10).map(otuID => `OTU ${otuID}`).reverse();
-        //var xvalues = sampl
         var barData = [
             {
                 y: yvalues,
                 x: sample_values.slice(0, 10).reverse(),
-                //text: otu_labels.slice(0, 10).reverse(),
                 type:"bar",
                 orientation: "h",
             }
