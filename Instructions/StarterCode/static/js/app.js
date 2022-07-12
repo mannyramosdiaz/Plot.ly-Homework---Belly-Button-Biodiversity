@@ -6,7 +6,7 @@ function buildData(sample) {
         var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
         var result = resultArray[0];
         
-        //**Chart div**//
+        //**Chart div for #sample-metadata in index.html page**//
         var CHART = d3.select("#sample-metadata");
 
         //**Clear html Chart**// 
@@ -20,12 +20,12 @@ function buildData(sample) {
 }
 
   function buildCharts(sample){
-
+//** Data of interest **/
     d3.json('samples.json').then((data) =>{
         var samples = data.samples;
         var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
         var result = resultArray[0];
-
+//** Organizing data in variables **/
         var otu_ids= result.otu_ids;
         var otu_labels = result.out_labels;
         var sample_values = result.sample_values;
@@ -81,7 +81,7 @@ function buildData(sample) {
 }
 
 function dataGrab() {
-
+//** Function that uses the name of data to use in other functions **/
     var link = d3.select("#selDataset");
 
     d3.json("samples.json").then((data)=>{
